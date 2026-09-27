@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-void: #0a0a0f;
+  --color-panel: #0f1320;
+  --color-blue: #2563eb;
+  --color-ice: #93c5fd;
+  --color-ink: #e8ecf5;
+  --color-muted: #8a93a8;
+  --color-line: rgb(232 236 245 / 0.1);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display-face);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-void);
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-void);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-blue);
+  color: #fff;
+}
+
+.glow {
+  text-shadow:
+    0 0 0.05em rgb(147 197 253 / 0.8),
+    0 0 0.25em rgb(37 99 235 / 0.8),
+    0 0 0.7em rgb(37 99 235 / 0.4);
+}
+
+/* The one moment of motion: the two halves of the name slide in and meet */
+.meet-left,
+.meet-right {
+  animation: meet 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.meet-left { --from: -18vw; }
+.meet-right { --from: 18vw; animation-delay: 80ms; }
+
+@keyframes meet {
+  from { transform: translateX(var(--from)); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meet-left,
+  .meet-right { animation: none; }
 }
